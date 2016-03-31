@@ -46,7 +46,6 @@ public class Proponente extends PessoaFisica{
 	@OneToMany(mappedBy="proponente", fetch=FetchType.LAZY)
 	private Collection<Seguro> seguros;
 	
-
 	public Collection<Seguro> getSeguros() {
 		return seguros;
 	}
