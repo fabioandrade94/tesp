@@ -5,14 +5,29 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @PrimaryKeyJoinColumn
+@Table(name="tb_dependente")
 public class Dependente extends PessoaFisica {
-
+    
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Max(30)
 	@Column(name = "grau_paretensco", length = 30, nullable = false)
 	private String grauParentesco;
 	
+	@NotNull
+	@DecimalMin("0.0")
+	@DecimalMax("100.0")
 	@Column(name = "percentual_beneficio", length = 30, nullable = false)
 	private String percentualBeneficio;
 	

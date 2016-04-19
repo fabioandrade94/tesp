@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_setor", uniqueConstraints = @UniqueConstraint(columnNames = { "nome" }))
@@ -22,6 +26,9 @@ public class Setor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Size(min=3, max=150)
 	@Column(length = 150, nullable = false)
 	private String nome;
 	

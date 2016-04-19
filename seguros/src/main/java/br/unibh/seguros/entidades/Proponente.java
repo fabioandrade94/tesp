@@ -12,12 +12,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity @PrimaryKeyJoinColumn
 @Table(name="tb_proponente", uniqueConstraints=@UniqueConstraint(columnNames={"matricula"}))
 public class Proponente extends PessoaFisica{
 
-
+	@NotBlank
+	@Pattern(regexp="\\d[0-9]")
+	@Size(min=3, max=8)
 	@Column(columnDefinition="char(8)", nullable=false)
 	private String matricula;
 	
@@ -25,9 +32,15 @@ public class Proponente extends PessoaFisica{
 	@Column(name="data_cadastro", nullable=false)
 	private Date dataCadastro;
 	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Max(30)
 	@Column(name="situacao_cadastro", nullable=false, length=30)
 	private String situacaoCadastro;
 	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Max(30)
 	@Column(nullable=false, length=30)
 	private String status;
 	
@@ -46,6 +59,7 @@ public class Proponente extends PessoaFisica{
 	@OneToMany(mappedBy="proponente", fetch=FetchType.LAZY)
 	private Collection<Seguro> seguros;
 	
+
 	public Collection<Seguro> getSeguros() {
 		return seguros;
 	}

@@ -15,6 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_usuario", uniqueConstraints=@UniqueConstraint(columnNames={"login"}))
@@ -24,21 +30,39 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Size(min=5, max=100)
 	@Column(length=100, nullable=false)
 	private String nome;
 	
+	@NotBlank
+	@Pattern(regexp="[A-Za-z]*")
+	@Size(min=8, max=15)
 	@Column(length=15, nullable=false)
 	private String login;
 	
+	@NotBlank
+	@Size(min=8, max=15)
 	@Column(length=100, nullable=false)
 	private String senha;
 	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Size(min=5, max=100)
 	@Column(length=30, nullable=false)
 	private String perfil;
 	
+	@NotBlank
+	@Pattern(regexp="[A-ZÃ€-Ãº ]*")
+	@Size(min=5, max=100)
 	@Column(length=100, nullable=false)
 	private String cargo;
 	
+	@NotBlank
+	@Email
+	@Max(100)
 	@Column(length=100, nullable=false)
 	private String email;
 	
